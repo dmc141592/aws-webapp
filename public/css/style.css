@@ -54,3 +54,105 @@ padding: 10px;
 text-align: center;
 
 }
+
+.login-container{
+
+max-width:400px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:8px;
+
+}
+
+.login-container form{
+
+display:flex;
+flex-direction:column;
+gap:10px;
+
+}
+
+.login-container input{
+
+padding:10px;
+font-size:16px;
+
+}
+
+.login-container button{
+
+margin-top:10px;
+padding:10px;
+background:#333;
+color:white;
+border:none;
+cursor:pointer;
+
+}
+
+.login-container button:hover{
+
+background:#555;
+
+}
+
+.downloads-container {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.download-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.download-card:last-child {
+  border-bottom: none;
+}
+
+.download-info h3 {
+  margin: 0 0 8px 0;
+}
+
+.download-info p {
+  margin: 0;
+}
+
+.download-card button {
+  min-width: 140px;
+  padding: 10px 14px;
+  border: none;
+  background: #333;
+  color: white;
+  cursor: not-allowed;
+}
+
+.download-card button:disabled {
+  opacity: 0.7;
+}
+
+
+.theme-container {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.theme-card {
+  max-width: 900px;
+  margin: 0 auto 20px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+}

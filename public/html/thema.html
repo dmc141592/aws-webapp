@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thema - AWS Web Application</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <header>
+    <h1>AWS Web Application</h1>
+
+    <nav>
+      <ul>
+        <li><a href="/">Startseite</a></li>
+        <li><a href="/thema">Thema</a></li>
+        <li><a href="/downloads">Downloads</a></li>
+        <li><a href="/login">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="theme-container">
+      <h2>Thema: AWS Web-Applikation mit geschütztem Downloadbereich</h2>
+      <p>
+        Dieses Projekt zeigt die Entwicklung und Bereitstellung einer Web-Applikation
+        auf Amazon Web Services. Die Anwendung kombiniert mehrere AWS-Dienste, um
+        Hosting, Speicherung, Authentifizierung und Datenverwaltung umzusetzen.
+      </p>
+    </section>
+
+    <section class="theme-card">
+      <h3>Projektziel</h3>
+      <p>
+        Ziel des Projekts ist die Erstellung einer Website mit mehreren Inhaltsbereichen
+        und einem geschützten Downloadbereich. Dokumente und ZIP-Dateien sollen nur
+        von angemeldeten Benutzern heruntergeladen werden können.
+      </p>
+    </section>
+
+    <section class="theme-card">
+      <h3>Verwendete AWS-Services</h3>
+      <ul>
+        <li><strong>Amazon EC2:</strong> Hosting der Web-Applikation</li>
+        <li><strong>Amazon RDS:</strong> Speicherung von Benutzern, Rollen und Rechten</li>
+        <li><strong>Amazon S3:</strong> Speicherung von Dokumenten und ZIP-Dateien</li>
+        <li><strong>Amazon CloudFront:</strong> schnelle Auslieferung von Inhalten</li>
+      </ul>
+    </section>
+
+    <section class="theme-card">
+      <h3>Architektur</h3>
+      <p>
+        Die Anwendung folgt einer Architektur, bei der der Benutzer über CloudFront
+        auf die Website zugreift. Die Web-Applikation läuft auf einer EC2-Instanz,
+        greift auf Benutzerdaten in Amazon RDS zu und verwaltet Dateien in Amazon S3.
+      </p>
+
+      <p><strong>Ablauf:</strong></p>
+      <p>User → CloudFront → EC2 → RDS / S3</p>
+    </section>
+
+    <section class="theme-card">
+      <h3>Technische Umsetzung</h3>
+      <p>
+        Das Frontend wird mit HTML, CSS und JavaScript umgesetzt. Für das Backend
+        wird Node.js verwendet. Zusätzlich kommt Express.js zum Einsatz, um Routing,
+        Request-Verarbeitung und die Serverstruktur einfacher und übersichtlicher
+        umzusetzen.
+      </p>
+      <p>
+        Die Anwendung wird später um eine MySQL-Datenbankverbindung, ein Login-System
+        und einen geschützten Downloadprozess erweitert.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Cloud Computing Projekt</p>
+  </footer>
+
+</body>
+</html>

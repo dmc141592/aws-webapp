@@ -12,7 +12,6 @@ const PORT = 3000;
    Middleware
 --------------------------- */
 
-// WICHTIG: Stellt sicher, dass CSS-Dateien unter /css/style.css erreichbar sind
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
@@ -74,6 +73,7 @@ app.post("/login", (req, res) => {
           username: user.username,
           role: user.role,
         };
+
         return res.redirect("/downloads");
       } else {
         return res.send("Falsches Passwort.");
@@ -86,7 +86,7 @@ app.post("/login", (req, res) => {
 });
 
 /* ---------------------------
-   Downloads (geschützt & korrigiertes Design)
+   Downloads
 --------------------------- */
 
 app.get("/downloads", (req, res) => {
@@ -95,9 +95,10 @@ app.get("/downloads", (req, res) => {
   }
 
   const userRole = req.session.user.role;
-  const sql = "SELECT * FROM files WHERE allowed_role = ? OR allowed_role = 'user'";
 
-  db.query(sql, [userRole], (err, results) => {
+  const sql = "SELECT * FROM files";
+
+  db.query(sql, (err, results) => {
     if (err) {
       console.error("Fehler beim Laden der Dateien:", err);
       return res.status(500).send("Datenbankfehler");
@@ -106,18 +107,32 @@ app.get("/downloads", (req, res) => {
     let fileList = "";
 
     results.forEach((file) => {
+      let actionHtml = "";
+
+      if (userRole === "gast") {
+        actionHtml = `<p style="color: #666; margin: 0;">Als Gast ist kein Download möglich</p>`;
+      } else if (userRole === "benutzer") {
+        if (file.allowed_role === "admin") {
+          actionHtml = `<p style="color: #666; margin: 0;">Nur für Admin verfügbar</p>`;
+        } else {
+          actionHtml = `<a href="/download/${file.id}" class="btn">Download</a>`;
+        }
+      } else if (userRole === "admin") {
+        actionHtml = `<a href="/download/${file.id}" class="btn">Download</a>`;
+      }
+
       fileList += `
         <div class="download-card">
           <div class="download-info">
             <h3>${file.title}</h3>
             <p>${file.description}</p>
+            <p><strong>Freigegeben für:</strong> ${file.allowed_role}</p>
           </div>
-          <a href="/download/${file.id}" class="btn">Download</a>
+          ${actionHtml}
         </div>
       `;
     });
 
-    // Das HTML wurde hier komplett an dein neues Design angepasst
     res.send(`
 <!DOCTYPE html>
 <html lang="de">
@@ -143,7 +158,11 @@ app.get("/downloads", (req, res) => {
     <main>
         <section>
             <h2>Downloadbereich</h2>
-            <p style="margin-bottom: 20px;">Eingeloggt als: <strong>${req.session.user.username}</strong></p>
+            <p style="margin-bottom: 20px;">
+              Eingeloggt als:
+              <strong>${req.session.user.username}</strong>
+              (${req.session.user.role})
+            </p>
 
             <div class="downloads-container">
                 ${fileList}
@@ -164,9 +183,9 @@ app.get("/downloads", (req, res) => {
   });
 });
 
-/*
+/* ---------------------------
    Einzelner Download
-*/
+--------------------------- */
 
 app.get("/download/:id", (req, res) => {
   if (!req.session.user) {
@@ -176,11 +195,15 @@ app.get("/download/:id", (req, res) => {
   const fileId = req.params.id;
   const userRole = req.session.user.role;
 
+  if (userRole === "gast") {
+    return res.status(403).send("Als Gast darfst du keine Dateien herunterladen.");
+  }
+
   const sql = "SELECT * FROM files WHERE id = ?";
 
   db.query(sql, [fileId], async (err, results) => {
     if (err) {
-      console.error(err);
+      console.error("Fehler bei der Datenbankabfrage:", err);
       return res.status(500).send("Datenbankfehler");
     }
 
@@ -190,22 +213,23 @@ app.get("/download/:id", (req, res) => {
 
     const file = results[0];
 
-    if (file.allowed_role !== "user" && file.allowed_role !== userRole) {
+    if (userRole === "benutzer" && file.allowed_role === "admin") {
       return res.status(403).send("Kein Zugriff auf diese Datei.");
     }
 
     try {
       const url = await createPresignedUrl(file.s3_key);
-      res.redirect(url);
+      return res.redirect(url);
     } catch (error) {
-      console.error(error);
-      res.status(500).send("S3 Fehler");
+      console.error("Fehler beim Erstellen der S3-URL:", error);
+      return res.status(500).send("S3 Fehler");
     }
   });
 });
 
-/* Logout
-*/
+/* ---------------------------
+   Logout
+--------------------------- */
 
 app.get("/logout", (req, res) => {
   req.session.destroy((err) => {
@@ -216,8 +240,9 @@ app.get("/logout", (req, res) => {
   });
 });
 
-/* Server starten
-*/
+/* ---------------------------
+   Server starten
+--------------------------- */
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server läuft auf http://localhost:${PORT}`);

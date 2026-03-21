@@ -1,79 +1,42 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Login</title>
-
-<link rel="stylesheet" href="/css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AWS Web Application</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
+    <header>
+        <h1>AWS Web Application</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Startseite</a></li>
+                <li><a href="/thema">Thema</a></li>
+                <li><a href="/downloads">Downloads</a></li>
+                <li><a href="/login" class="active">Login</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<header>
+    <main>
+        <section style="max-width: 450px; margin: 0 auto;">
+            <h2>Login</h2>
+            <p>Melden Sie sich an, um geschützte Inhalte zu sehen.</p>
+            <form action="/login" method="POST">
+                <label for="username">Benutzername</label>
+                <input type="text" id="username" name="username" placeholder="Dein Benutzername" required>
 
-<h1>AWS Web Application</h1>
+                <label for="password">Passwort</label>
+                <input type="password" id="password" name="password" placeholder="********" required>
 
-<nav>
-<ul>
+                <button type="submit">Jetzt Anmelden</button>
+            </form>
+        </section>
+    </main>
 
-<li><a href="/">Startseite</a></li>
-<li><a href="/thema">Thema</a></li>
-<li><a href="/downloads">Downloads</a></li>
-<li><a href="/login">Login</a></li>
-
-</ul>
-</nav>
-
-</header>
-
-
-<main>
-
-<section class="login-container">
-
-<h2>Login</h2>
-
-<p>Bitte melden Sie sich an, um auf den Downloadbereich zuzugreifen.</p>
-
-<form action="/login" method="POST">
-
-<label for="username">Benutzername</label>
-
-<input 
-type="text"
-id="username"
-name="username"
-required
->
-
-<label for="password">Passwort</label>
-
-<input 
-type="password"
-id="password"
-name="password"
-required
->
-
-<button type="submit">Login</button>
-
-</form>
-
-</section>
-
-</main>
-
-
-<footer>
-
-<p>AWS Projekt</p>
-
-</footer>
-
+    <footer>
+        <p>AWS Projekt</p>
+    </footer>
 </body>
 </html>

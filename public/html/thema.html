@@ -10,11 +10,10 @@
 
   <header>
     <h1>AWS Web Application</h1>
-
     <nav>
       <ul>
         <li><a href="/">Startseite</a></li>
-        <li><a href="/thema">Thema</a></li>
+        <li><a href="/thema" class="active">Thema</a></li>
         <li><a href="/downloads">Downloads</a></li>
         <li><a href="/login">Login</a></li>
       </ul>
@@ -22,57 +21,55 @@
   </header>
 
   <main>
-    <section class="theme-container">
-      <h2>Thema: AWS Web-Applikation mit geschütztem Downloadbereich</h2>
+    <section>
+      <h2>Das Projekt im Detail</h2>
       <p>
-        Dieses Projekt zeigt die Entwicklung und Bereitstellung einer Web-Applikation
-        auf Amazon Web Services. Die Anwendung kombiniert mehrere AWS-Dienste, um
-        Hosting, Speicherung, Authentifizierung und Datenverwaltung umzusetzen.
+        Diese Web-Applikation demonstriert die Cloud-Native Entwicklung auf Amazon Web Services. 
+        Durch die Kombination verschiedener Managed Services erreichen wir hohe Skalierbarkeit und Sicherheit.
       </p>
     </section>
 
-    <section class="theme-card">
+    <div class="theme-card">
       <h3>Projektziel</h3>
       <p>
-        Ziel des Projekts ist die Erstellung einer Website mit mehreren Inhaltsbereichen
-        und einem geschützten Downloadbereich. Dokumente und ZIP-Dateien sollen nur
-        von angemeldeten Benutzern heruntergeladen werden können.
+        Ziel ist die Bereitstellung einer sicheren Plattform mit rollenbasiertem Zugriff. 
+        Dokumente und ZIP-Dateien sind physisch getrennt vom Webserver gespeichert und nur nach Authentifizierung abrufbar.
       </p>
-    </section>
+    </div>
 
-    <section class="theme-card">
+    <section style="margin-top: 2rem;">
       <h3>Verwendete AWS-Services</h3>
-      <ul>
-        <li><strong>Amazon EC2:</strong> Hosting der Web-Applikation</li>
-        <li><strong>Amazon RDS:</strong> Speicherung von Benutzern, Rollen und Rechten</li>
-        <li><strong>Amazon S3:</strong> Speicherung von Dokumenten und ZIP-Dateien</li>
-        <li><strong>Amazon CloudFront:</strong> schnelle Auslieferung von Inhalten</li>
+      <ul style="list-style: none; padding: 0;">
+        <li class="theme-card" style="display: block;">
+            <strong>Amazon EC2:</strong> Rechenleistung für das Node.js Backend.
+        </li>
+        <li class="theme-card" style="display: block;">
+            <strong>Amazon RDS:</strong> Strukturierte Speicherung von Nutzerdaten in einer MySQL-Instanz.
+        </li>
+        <li class="theme-card" style="display: block;">
+            <strong>Amazon S3:</strong> Sicherer Objektspeicher für die PDF- und ZIP-Downloads.
+        </li>
+        <li class="theme-card" style="display: block;">
+            <strong>Amazon CloudFront:</strong> Content Delivery Network (CDN) für minimale Ladezeiten.
+        </li>
       </ul>
     </section>
 
-    <section class="theme-card">
-      <h3>Architektur</h3>
-      <p>
-        Die Anwendung folgt einer Architektur, bei der der Benutzer über CloudFront
-        auf die Website zugreift. Die Web-Applikation läuft auf einer EC2-Instanz,
-        greift auf Benutzerdaten in Amazon RDS zu und verwaltet Dateien in Amazon S3.
+    <section>
+      <h3>System-Architektur</h3>
+      <div style="background: #e7f1ff; padding: 1.5rem; border-radius: 8px; text-align: center; font-weight: bold; color: #003d80;">
+        User &rarr; CloudFront &rarr; EC2 (Express.js) &rarr; RDS / S3
+      </div>
+      <p style="margin-top: 1rem; font-size: 0.9rem; color: #636e72;">
+        Die Architektur stellt sicher, dass der direkte Zugriff auf Ressourcen (S3) unterbunden wird und Anfragen immer über die Sicherheitsinstanzen laufen.
       </p>
-
-      <p><strong>Ablauf:</strong></p>
-      <p>User → CloudFront → EC2 → RDS / S3</p>
     </section>
 
-    <section class="theme-card">
+    <section>
       <h3>Technische Umsetzung</h3>
       <p>
-        Das Frontend wird mit HTML, CSS und JavaScript umgesetzt. Für das Backend
-        wird Node.js verwendet. Zusätzlich kommt Express.js zum Einsatz, um Routing,
-        Request-Verarbeitung und die Serverstruktur einfacher und übersichtlicher
-        umzusetzen.
-      </p>
-      <p>
-        Die Anwendung wird später um eine MySQL-Datenbankverbindung, ein Login-System
-        und einen geschützten Downloadprozess erweitert.
+        Das Backend nutzt <strong>Node.js</strong> und <strong>Express.js</strong> für das Routing. 
+        Die Verbindung zur Datenbank erfolgt über verschlüsselte Verbindungen direkt innerhalb der AWS VPC (Virtual Private Cloud).
       </p>
     </section>
   </main>

@@ -1,158 +1,193 @@
-body {
-
-font-family: Arial, sans-serif;
-margin: 0;
-background: #f4f4f4;
-
+/* Grundlegende Einstellungen */
+:root {
+    --primary-blue: #0056b3;
+    --light-blue: #e7f1ff;
+    --dark-blue: #003d80;
+    --bg-white: #ffffff;
+    --text-black: #2d3436;
+    --text-gray: #636e72;
+    --border-color: #dfe6e9;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
 }
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-black);
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header & Navigation */
 header {
+    background-color: var(--bg-white);
+    box-shadow: var(--shadow);
+    padding: 1.5rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-background: #222;
-color: white;
-padding: 20px;
-
+header h1 {
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
 nav ul {
-
-list-style: none;
-display: flex;
-gap: 20px;
-padding: 0;
-
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
 }
 
 nav a {
-
-color: white;
-text-decoration: none;
-font-weight: bold;
-
+    text-decoration: none;
+    color: var(--text-gray);
+    font-weight: 500;
+    transition: var(--transition);
 }
 
+nav a:hover, nav a.active {
+    color: var(--primary-blue);
+}
+
+/* Main Content Area */
 main {
-
-padding: 40px;
-
+    flex: 1;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    width: 100%;
 }
 
-.hero {
-
-background: white;
-padding: 30px;
-border-radius: 8px;
-
+section {
+    background: var(--bg-white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
 }
 
-footer {
-
-margin-top: 40px;
-background: #222;
-color: white;
-padding: 10px;
-text-align: center;
-
+h2 {
+    color: var(--dark-blue);
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--primary-blue);
+    padding-left: 1rem;
 }
 
-.login-container{
-
-max-width:400px;
-margin:auto;
-background:white;
-padding:30px;
-border-radius:8px;
-
+h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-blue);
 }
 
-.login-container form{
-
-display:flex;
-flex-direction:column;
-gap:10px;
-
+/* Listen-Styling */
+ul {
+    padding-left: 1.2rem;
+    margin-bottom: 1rem;
 }
 
-.login-container input{
-
-padding:10px;
-font-size:16px;
-
+li {
+    margin-bottom: 0.5rem;
 }
 
-.login-container button{
-
-margin-top:10px;
-padding:10px;
-background:#333;
-color:white;
-border:none;
-cursor:pointer;
-
-}
-
-.login-container button:hover{
-
-background:#555;
-
-}
-
-.downloads-container {
-  max-width: 900px;
-  margin: auto;
-  background: white;
-  padding: 30px;
-  border-radius: 8px;
-}
-
-.download-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  padding: 20px 0;
-  border-bottom: 1px solid #ddd;
-}
-
-.download-card:last-child {
-  border-bottom: none;
-}
-
-.download-info h3 {
-  margin: 0 0 8px 0;
-}
-
-.download-info p {
-  margin: 0;
-}
-
-.download-card button {
-  min-width: 140px;
-  padding: 10px 14px;
-  border: none;
-  background: #333;
-  color: white;
-  cursor: not-allowed;
-}
-
-.download-card button:disabled {
-  opacity: 0.7;
-}
-
-
-.theme-container {
-  max-width: 900px;
-  margin: auto;
-  background: white;
-  padding: 30px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+/* Cards (Thema & Downloads) */
+.theme-card, .download-card {
+    background: var(--light-blue);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
 }
 
 .theme-card {
-  max-width: 900px;
-  margin: 0 auto 20px auto;
-  background: white;
-  padding: 25px;
-  border-radius: 8px;
+    display: block; /* Für Text-Content */
+    background: var(--bg-white);
+}
+
+.download-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* Buttons */
+button, .btn {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+button:hover:not(:disabled) {
+    background-color: var(--dark-blue);
+}
+
+button:disabled {
+    background-color: #b2bec3;
+    cursor: not-allowed;
+}
+
+/* Formulare (Login) */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+input {
+    padding: 0.8rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--primary-blue);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--text-black);
+    color: var(--bg-white);
+    font-size: 0.9rem;
+}
+
+/* Mobile Anpassung */
+@media (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .download-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
 }

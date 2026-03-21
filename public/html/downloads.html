@@ -1,63 +1,50 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Downloads - AWS Web Application</title>
-  <link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Downloads - AWS Web Application</title>
+    
 </head>
 <body>
+    <header>
+        <h1>AWS Web Application</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Startseite</a></li>
+                <li><a href="/thema">Thema</a></li>
+                <li><a href="/downloads" class="active">Downloads</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <header>
-    <h1>AWS Web Application</h1>
+    <main>
+        <section>
+            <h2>Downloadbereich</h2>
+            <p>Sicherer Zugriff auf Projektunterlagen. Bitte loggen Sie sich ein, um die Dateien herunterzuladen.</p>
 
-    <nav>
-      <ul>
-        <li><a href="/">Startseite</a></li>
-        <li><a href="/thema">Thema</a></li>
-        <li><a href="/downloads">Downloads</a></li>
-        <li><a href="/login">Login</a></li>
-      </ul>
-    </nav>
-  </header>
+            <div class="download-card">
+                <div class="download-info">
+                    <h3>Projektbeschreibung.pdf</h3>
+                    <p>Detaillierte Anforderungen und Projektziele.</p>
+                </div>
+                <button type="button" disabled title="Login erforderlich">Download</button>
+            </div>
 
-  <main>
-    <section class="downloads-container">
-      <h2>Downloadbereich</h2>
-      <p>
-        In der finalen Anwendung können hier nur angemeldete Benutzer
-        auf freigegebene Dokumente und ZIP-Dateien zugreifen.
-      </p>
+            <div class="download-card">
+                <div class="download-info">
+                    <h3>Architekturdiagramm.pdf</h3>
+                    <p>Visualisierung der AWS Infrastruktur.</p>
+                </div>
+                <button type="button" disabled title="Login erforderlich">Download</button>
+            </div>
+        </section>
+    </main>
 
-      <div class="download-card">
-        <div class="download-info">
-          <h3>Projektbeschreibung.pdf</h3>
-          <p>Enthält die Beschreibung und die Anforderungen des Projekts.</p>
-        </div>
-        <button type="button" disabled>Download</button>
-      </div>
-
-      <div class="download-card">
-        <div class="download-info">
-          <h3>Dokumentation.zip</h3>
-          <p>ZIP-Datei mit zusätzlichen Unterlagen und Beispieldateien.</p>
-        </div>
-        <button type="button" disabled>Download</button>
-      </div>
-
-      <div class="download-card">
-        <div class="download-info">
-          <h3>Architekturdiagramm.pdf</h3>
-          <p>Übersicht über die AWS-Architektur der Web-Applikation.</p>
-        </div>
-        <button type="button" disabled>Download</button>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>Cloud Computing Projekt</p>
-  </footer>
-
+    <footer>
+        <p>Cloud Computing Projekt</p>
+    </footer>
 </body>
 </html>

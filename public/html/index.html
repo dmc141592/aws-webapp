@@ -1,88 +1,40 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AWS Web Application</title>
-
-<link rel="stylesheet" href="/css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Web Application</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
+    <header>
+        <h1>AWS Web Application</h1>
+        <nav>
+            <ul>
+                <li><a href="/" class="active">Startseite</a></li>
+                <li><a href="/thema">Thema</a></li>
+                <li><a href="/downloads">Downloads</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<header>
+    <main>
+        <section class="hero">
+            <h2>Willkommen zur AWS Web-Applikation</h2>
+            <p>Diese Website demonstriert die Verwendung verschiedener Amazon Web Services in einer modernen Cloud-Infrastruktur.</p>
+            <p>Die Anwendung nutzt folgende Services:</p>
+            <ul>
+                <li><strong>EC2</strong> für das skalierbare Hosting</li>
+                <li><strong>RDS</strong> für sichere Benutzerdaten</li>
+                <li><strong>S3</strong> für effiziente Dokumentenspeicherung</li>
+                <li><strong>CloudFront</strong> für globale Performance</li>
+            </ul>
+        </section>
+    </main>
 
-<h1>AWS Web Application</h1>
-
-<nav>
-
-<ul>
-
-<li><a href="/">Startseite</a></li>
-
-<li><a href="/thema">Thema</a></li>
-
-<li><a href="/downloads">Downloads</a></li>
-
-<li><a href="/login">Login</a></li>
-
-</ul>
-
-</nav>
-
-</header>
-
-
-<main>
-
-<section class="hero">
-
-<h2>Willkommen zur AWS Web-Applikation</h2>
-
-<p>
-Diese Website demonstriert die Verwendung verschiedener Amazon Web Services.
-</p>
-
-<p>
-Die Anwendung verwendet folgende Cloud Services:
-</p>
-
-<ul>
-
-<li>EC2 für Hosting</li>
-<li>RDS für Benutzerdaten</li>
-<li>S3 für Dokumente</li>
-<li>CloudFront für schnelle Auslieferung</li>
-
-</ul>
-
-</section>
-
-
-<section>
-
-<h2>Projektbeschreibung</h2>
-
-<p>
-
-Diese Webanwendung enthält eine Themenseite sowie einen geschützten Downloadbereich.
-Dokumente können nur von angemeldeten Benutzern heruntergeladen werden.
-
-</p>
-
-</section>
-
-</main>
-
-
-<footer>
-
-<p>Cloud Computing Projekt</p>
-
-</footer>
-
+    <footer>
+        <p>&copy; 2024 Cloud Computing Projekt</p>
+    </footer>
 </body>
 </html>

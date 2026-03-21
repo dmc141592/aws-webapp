@@ -12,6 +12,7 @@ const PORT = 3000;
    Middleware
 --------------------------- */
 
+// WICHTIG: Stellt sicher, dass CSS-Dateien unter /css/style.css erreichbar sind
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
@@ -39,7 +40,6 @@ app.get("/login", (req, res) => {
   if (req.session.user) {
     return res.redirect("/downloads");
   }
-
   res.sendFile(path.join(__dirname, "public", "html", "login.html"));
 });
 
@@ -51,9 +51,6 @@ app.post("/login", (req, res) => {
   const username = req.body.username.trim();
   const password = req.body.password;
 
-  console.log("Eingegebener Benutzername:", username);
-  console.log("Formulardaten:", req.body);
-
   const sql = "SELECT * FROM users WHERE username = ?";
 
   db.query(sql, [username], async (err, results) => {
@@ -61,8 +58,6 @@ app.post("/login", (req, res) => {
       console.error("Fehler bei der Datenbankabfrage:", err);
       return res.status(500).send("Datenbankfehler");
     }
-
-    console.log("DB Ergebnis:", results);
 
     if (results.length === 0) {
       return res.send("Benutzer nicht gefunden.");
@@ -79,7 +74,6 @@ app.post("/login", (req, res) => {
           username: user.username,
           role: user.role,
         };
-
         return res.redirect("/downloads");
       } else {
         return res.send("Falsches Passwort.");
@@ -92,7 +86,7 @@ app.post("/login", (req, res) => {
 });
 
 /* ---------------------------
-   Downloads (geschützt)
+   Downloads (geschützt & korrigiertes Design)
 --------------------------- */
 
 app.get("/downloads", (req, res) => {
@@ -101,7 +95,6 @@ app.get("/downloads", (req, res) => {
   }
 
   const userRole = req.session.user.role;
-
   const sql = "SELECT * FROM files WHERE allowed_role = ? OR allowed_role = 'user'";
 
   db.query(sql, [userRole], (err, results) => {
@@ -114,23 +107,59 @@ app.get("/downloads", (req, res) => {
 
     results.forEach((file) => {
       fileList += `
-        <div>
-          <h3>${file.title}</h3>
-          <p>${file.description}</p>
-          <a href="/download/${file.id}">Download</a>
+        <div class="download-card">
+          <div class="download-info">
+            <h3>${file.title}</h3>
+            <p>${file.description}</p>
+          </div>
+          <a href="/download/${file.id}" class="btn">Download</a>
         </div>
-        <hr>
       `;
     });
 
+    // Das HTML wurde hier komplett an dein neues Design angepasst
     res.send(`
-      <h1>Downloadbereich</h1>
-      <p>Eingeloggt als ${req.session.user.username}</p>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloads - AWS Web Application</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>AWS Web Application</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Startseite</a></li>
+                <li><a href="/thema">Thema</a></li>
+                <li><a href="/downloads" class="active">Downloads</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
 
-      ${fileList}
+    <main>
+        <section>
+            <h2>Downloadbereich</h2>
+            <p style="margin-bottom: 20px;">Eingeloggt als: <strong>${req.session.user.username}</strong></p>
 
-      <br>
-      <a href="/logout">Logout</a>
+            <div class="downloads-container">
+                ${fileList}
+            </div>
+
+            <div style="margin-top: 30px; text-align: center;">
+                <a href="/logout" class="btn" style="background-color: #d63031;">Logout</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Cloud Computing Projekt</p>
+    </footer>
+</body>
+</html>
     `);
   });
 });
@@ -175,23 +204,20 @@ app.get("/download/:id", (req, res) => {
   });
 });
 
-/* 
-   Logout
- */
+/* Logout
+*/
 
 app.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       return res.send("Fehler beim Logout.");
     }
-
     res.redirect("/login");
   });
 });
 
-/* 
-   Server starten
- */
+/* Server starten
+*/
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server läuft auf http://localhost:${PORT}`);
